@@ -1,0 +1,111 @@
+<html>
+<head>
+    <title>Pixeltable Memory</title>
+</head>
+
+<body>
+    <div x-data>
+        <template x-if="config">
+            <div>
+                <div class="section-title">Pixeltable Memory</div>
+                <div class="section-description">
+                    Store Agent Zero memories in a Pixeltable table with a local
+                    sentence-transformers embedding index.
+                </div>
+
+                <div class="field" x-show="context.projectName">
+                    <div class="field-label">
+                        <div class="field-title">Project Isolation</div>
+                        <div class="field-description">
+                            If enabled, this project uses its own memory_subdir
+                            (projects/NAME). If disabled, it shares the configured subdirectory.
+                        </div>
+                    </div>
+                    <div class="field-control">
+                        <label class="toggle">
+                            <input type="checkbox" x-model="config.project_memory_isolation" />
+                            <span class="toggler"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">
+                        <div class="field-title">Memory Subdirectory</div>
+                        <div class="field-description">
+                            Value stored in the Pixeltable memory_subdir column when
+                            project isolation does not apply.
+                        </div>
+                    </div>
+                    <div class="field-control">
+                        <input type="text" x-model="config.agent_memory_subdir" placeholder="default" />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">
+                        <div class="field-title">Embedding model</div>
+                        <div class="field-description">
+                            Hugging Face sentence-transformers model id used for the
+                            Pixeltable embedding index. Default is all-MiniLM-L6-v2.
+                        </div>
+                    </div>
+                    <div class="field-control">
+                        <input type="text" x-model="config.embedding_model" placeholder="all-MiniLM-L6-v2" />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">
+                        <div class="field-title">Default search threshold</div>
+                        <div class="field-description">
+                            Cosine similarity from 0 to 1 used when load/forget omit threshold.
+                        </div>
+                    </div>
+                    <div class="field-control">
+                        <input type="number" min="0" max="1" step="0.05" x-model.number="config.default_threshold" />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">
+                        <div class="field-title">Default search limit</div>
+                        <div class="field-description">
+                            Maximum memories returned by load when limit is omitted.
+                        </div>
+                    </div>
+                    <div class="field-control">
+                        <input type="number" min="1" step="1" x-model.number="config.default_limit" />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">
+                        <div class="field-title">Pixeltable directory</div>
+                        <div class="field-description">
+                            Catalog directory name created with pxt.create_dir.
+                        </div>
+                    </div>
+                    <div class="field-control">
+                        <input type="text" x-model="config.pixeltable_dir" placeholder="a0_pixeltable_memory" />
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">
+                        <div class="field-title">PIXELTABLE_HOME</div>
+                        <div class="field-description">
+                            Optional catalog location. Leave empty to use Pixeltable's default
+                            (~/.pixeltable). Changing this after memories exist points at a
+                            different catalog.
+                        </div>
+                    </div>
+                    <div class="field-control">
+                        <input type="text" x-model="config.pixeltable_home" placeholder="" />
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</body>
+</html>
