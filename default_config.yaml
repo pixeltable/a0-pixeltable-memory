@@ -1,0 +1,7 @@
+embedding_model: all-MiniLM-L6-v2
+default_threshold: 0.7
+default_limit: 10
+project_memory_isolation: true
+agent_memory_subdir: default
+pixeltable_dir: a0_pixeltable_memory
+pixeltable_home: ""
